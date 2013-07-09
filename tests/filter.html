@@ -47,9 +47,9 @@ document.write( test(function() {
   result = filter( [ ONE, TWO, THREE ], isTrue );
   assert(
     result.length === 3 &&
-    result[0] === ONE &&
-    result[1] === TWO &&
-    result[2] === THREE,
+    result[ 0 ] === ONE &&
+    result[ 1 ] === TWO &&
+    result[ 2 ] === THREE,
           "all items expected to be preserved when criterion is always true" );
 
   result = filter( [ ONE, TWO, THREE ], isFalse );
@@ -60,22 +60,22 @@ document.write( test(function() {
   result = filter( [ ONE, TWO, THREE ], isOddOffset );
   assert(
     result.length === 1 &&
-    result[0] === TWO,
+    result[ 0 ] === TWO,
             "only item at offset 1 expected when criterion is 'odd offset'" );
 
   result = filter( [ ONE, TWO, THREE ], isEvenOffset );
   assert(
     result.length === 2 &&
-    result[0] === ONE &&
-    result[1] === THREE,
+    result[ 0 ] === ONE &&
+    result[ 1 ] === THREE,
    "only items at offsets 0 and 3 expected when criterion is 'even offset'" );
 
   result = filter( [ ONE, ONE, ONE ], isONE );
   assert(
     result.length === 3 &&
-    result[0] === ONE &&
-    result[1] === ONE &&
-    result[2] === ONE,
+    result[ 0 ] === ONE &&
+    result[ 1 ] === ONE &&
+    result[ 2 ] === ONE,
                "all identical items expected when they match the condition" );
 
   result = filter( [ ONE, ONE, ONE ], isTWO );
@@ -86,19 +86,19 @@ document.write( test(function() {
   result = filter( [ ONE, TWO, THREE ], isONE );
   assert(
     result.length === 1 &&
-    result[0] === ONE,
+    result[ 0 ] === ONE,
                                    "first item expected to match criterion" );
 
   result = filter( [ ONE, TWO, THREE ], isTWO );
   assert(
     result.length === 1 &&
-    result[0] === TWO,
+    result[ 0 ] === TWO,
                                   "second item expected to match criterion" );
 
   result = filter( [ ONE, TWO, THREE ], isTHREE );
   assert(
     result.length === 1 &&
-    result[0] === THREE,
+    result[ 0 ] === THREE,
                                     "last item expected to match criterion" );
 
 }) );
