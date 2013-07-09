@@ -28,7 +28,7 @@ these functions in a closure of your choice.
 
 Besides native objects and methods, these functions depend exclusively
 on functions defined in [project nada][NADA]; these dependencies are
-listed in a comment at the start of each file.
+listed in the documentation of the function.
 
 Look at unit tests for an example of use; you can find the documentation
 of each function in its source code.
