@@ -2,6 +2,9 @@
   Select items that match a criterion,
   expressed as a boolean function, in a list
 
+  Dependencies:
+    nada/forEach.js
+
   Parameters:
     array - array, the list of items to filter
     criterion - function( item, i ), the criterion applied to select items,
@@ -12,18 +15,13 @@
     array, the list of items that match the criterion
 */
 function filter( array, criterion ) {
-  var
-    i,
-    length = array.length,
-    item,
-    result = [];
+  var result = [];
 
-  for ( i = 0; i < length; i++ ) {
-    item = array[i];
+  forEach( array, function( item, i ) {
     if ( criterion( item, i ) === true ) {
       result.push( item );
     }
-  }
+  });
 
   return result;
 }
