@@ -2,7 +2,7 @@
   Select items that match a criterion,
   expressed as a boolean function, in a list
 
-  Dependencies:
+  Dependency:
     nada/forEach.js
 
   Parameters:
