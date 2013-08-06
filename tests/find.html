@@ -1,0 +1,72 @@
+<script src="../surf/nada/tests/test.js"></script>
+<script src="../surf/nada/tests/assert.js"></script>
+<script src="../surf/nada/forEach.js"></script>
+<script src="../find.js"></script>
+<script>
+document.write( test(function() {
+
+  function anything() {
+    return true;
+  }
+
+  function nothing() {
+    return false;
+  }
+
+  function anyOddNumber( item ) {
+    return item % 2 === 1;
+  }
+
+  function anyEvenNumber( item ) {
+    return item % 2 === 0;
+  }
+
+  var
+    ONE = {},
+    TWO = "two",
+    THREE = /three/;
+
+  function theOne( item ) {
+    return item === ONE;
+  }
+
+  assert( find( [], nothing ) === null,
+               "null is expected when looking for nothing in an empty array" );
+
+  assert( find( [ ONE, TWO, THREE ], nothing ) === null,
+            "null is expected when looking for nothing in a non-empty array" );
+
+  assert( find( [], anything ) === null,
+                "null is expected trying to find anything in an empty array" );
+
+  assert( find( [ ONE, TWO, THREE ], anything ) === ONE,
+     "first item is expected when looking for anything in a non-empty array" );
+
+  assert(
+    find( [ 1, 2, 3 ], anyOddNumber ) === 1 &&
+    find( [ 2, 1, 3 ], anyOddNumber ) === 1 &&
+    find( [ 3, 1, 2 ], anyOddNumber ) === 3,
+                                  "first odd number expected to be returned" );
+
+  assert(
+    find( [ 1, 2, 3 ], anyEvenNumber ) === 2 &&
+    find( [ 2, 1, 3 ], anyEvenNumber ) === 2 &&
+    find( [ 3, 1, 2 ], anyEvenNumber ) === 2,
+                                 "first even number expected to be returned" );
+
+  assert(
+    find( [ ONE, TWO, THREE ], theOne ) === ONE &&
+    find( [ TWO, ONE, THREE ], theOne ) === ONE &&
+    find( [ THREE, ONE, TWO ], theOne ) === ONE,
+                                     "the ONE must be found in any position" );
+
+  assert(
+    find( [ ONE, ONE, ONE ], theOne ) === ONE,
+                        "the ONE must be found when all items are identical" );
+
+  assert(
+    find( [ TWO, TWO, TWO ], theOne ) === null,
+                                 "null expected when the ONE is not present" );
+
+}) );
+</script>
