@@ -1,0 +1,60 @@
+<script src="../surf/nada/tests/test.js"></script>
+<script src="../surf/nada/tests/assert.js"></script>
+<script src="../surf/nada/forEach.js"></script>
+<script src="../map.js"></script>
+<script>
+document.write( test(function() {
+
+  function identity( value ){
+    return value;
+  }
+
+  function doubleValue( value ){
+    return value * 2;
+  }
+
+  function getOffset( value, offset ){
+    return offset;
+  }
+
+  var result;
+
+  result = map( [], identity );
+  assert( result.length === 0,
+                "empty array expected when map is applied to an empty array" );
+
+  var
+    ONE = { one: 1 },
+    TWO = "two",
+    THREE = [ 3 ];
+
+  result = map( [ ONE, TWO, THREE ], identity );
+  assert(
+    result.length === 3 &&
+    result[ 0 ] === ONE &&
+    result[ 1 ] === TWO &&
+    result[ 2 ] === THREE,
+                    "same elements expected when applying identity function" );
+
+  result = map( [ 1, 2, 3, 2, 1 ], doubleValue );
+  assert(
+    result.length === 5 &&
+    result[ 0 ] === 2 &&
+    result[ 1 ] === 4 &&
+    result[ 2 ] === 6 &&
+    result[ 3 ] === 4 &&
+    result[ 4 ] === 2,
+                "doubled values are expected in result array of same length" );
+
+  result = map( [ 9, 9, 9, 9, 9 ], getOffset );
+  assert(
+    result.length === 5 &&
+    result[ 0 ] === 0 &&
+    result[ 1 ] === 1 &&
+    result[ 2 ] === 2 &&
+    result[ 3 ] === 3 &&
+    result[ 4 ] === 4,
+            "array of same length with offsets as values expected as result" );
+
+}) );
+</script>
