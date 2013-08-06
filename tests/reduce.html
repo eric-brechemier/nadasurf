@@ -1,0 +1,33 @@
+<script src="../surf/nada/tests/test.js"></script>
+<script src="../surf/nada/tests/assert.js"></script>
+<script src="../surf/nada/forEach.js"></script>
+<script src="../reduce.js"></script>
+<script>
+document.write( test(function() {
+
+  var result;
+
+  function sum( accumulator, value ) {
+    return accumulator + value;
+  }
+
+  function weightedSum( accumulator, value, offset ) {
+    return accumulator + ( 1 + offset ) * value;
+  }
+
+  var ANYTHING = {};
+
+  assert(
+    reduce( ANYTHING, [], sum ) === ANYTHING,
+                         "accumulator expected when reducing an empty array" );
+
+  assert(
+    reduce( 0, [ 1, 2, 3, 4 ], sum ) === 10,
+                                "10 expected for sum of numbers from 1 to 4" );
+
+  assert(
+    reduce( 25, [ 1, 2, 3, 4 ], weightedSum ) === 55,
+                                           "sum of 5 first squares expected" );
+
+}) );
+</script>
