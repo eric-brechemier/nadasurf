@@ -41,22 +41,5 @@ document.write( test( function(){
     args1[ 2 ] === three,
                                          "alias must call original function " +
       "with first argument as context and following arguments as parameters" );
-
-  var has = alias( Object.prototype.hasOwnProperty );
-
-  var
-    object = {},
-    name = "property1";
-
-  assert( has( object, name ) === object.hasOwnProperty( name ),
-            "The example code must give expected result with an emty object" );
-
-  var value1 = "value1";
-  object[ name ] = value1;
-
-  assert( has( object, name ) === object.hasOwnProperty( name ),
-                            "The example code must also give expected result "+
-                            "when the object has a property with given name" );
-
 }) );
 </script>

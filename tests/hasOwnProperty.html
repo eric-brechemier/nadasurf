@@ -1,0 +1,32 @@
+<script src="../surf/nada/tests/assert.js"></script>
+<script src="../surf/nada/tests/test.js"></script>
+<script src="../surf/nada/bind.js"></script>
+<script src="../alias.js"></script>
+<script src="../hasOwnProperty.js"></script>
+<script>
+document.write( test( function(){
+
+  function Child(){
+     this.ownProperty = "own";
+     this.commonProperty = "own";
+  }
+
+  Child.prototype = {
+    inheritedProperty: "inherited",
+    commonProperty: "inherited"
+  };
+
+  assert( !hasOwnProperty( new Child(), "missing" ),
+                                   "missing property is not an own property" );
+
+  assert( !hasOwnProperty( new Child(), "inheritedProperty" ),
+                                 "inheritedProperty is not an own property" );
+
+  assert( hasOwnProperty( new Child(), "ownProperty" ),
+                                           "ownProperty is an own property" );
+
+  assert( hasOwnProperty( new Child(), "commonProperty" ),
+                                   "commonProperty is also an own property" );
+
+}) );
+</script>
