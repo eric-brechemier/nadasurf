@@ -1,0 +1,79 @@
+<script src="../surf/nada/tests/test.js"></script>
+<script src="../surf/nada/tests/assert.js"></script>
+<script src="../surf/nada/always.js"></script>
+<script src="../surf/nada/bind.js"></script>
+<script src="../alias.js"></script>
+<script src="../hasOwnProperty.js"></script>
+<script src="../forEachProperty.js"></script>
+<script>
+document.write( test(function() {
+
+  var
+    count = 0,
+    captured = {},
+    ONE = 1,
+    TWO = "two",
+    THREE = /3/;
+
+  function capture( value, name ) {
+    captured[name] = value;
+    count++;
+  }
+
+  forEachProperty( {}, capture );
+
+  assert( count === 0,                "no call expected for an empty object" );
+
+  forEachProperty(
+    {
+      a: null,
+      b: ONE,
+      c: TWO,
+      d: THREE,
+      e: undefined
+    },
+    capture
+  );
+
+  assert(
+    count === 5 &&
+    captured[ "a" ] === null &&
+    captured[ "b" ] === ONE &&
+    captured[ "c" ] === TWO &&
+    captured[ "d" ] === THREE &&
+    captured[ "e" ] === undefined,
+              "one call expected for each item including null and undefined " +
+                  "with value and name provided as arguments, in this order" );
+
+  function Child(){
+     this.childA = null;
+     this.childB = ONE;
+     this.childC = TWO;
+     this.childD = THREE;
+     this.childE = undefined;
+  }
+
+  Child.prototype = {
+    ancestorA: null,
+    ancestorB: ONE,
+    ancestorC: TWO,
+    ancestorD: THREE,
+    ancestorE: undefined
+  };
+
+  count = 0;
+  captured = {};
+  forEachProperty( new Child(), capture );
+
+  assert(
+    count === 5 &&
+    captured[ "childA" ] === null &&
+    captured[ "childB" ] === ONE &&
+    captured[ "childC" ] === TWO &&
+    captured[ "childD" ] === THREE &&
+    captured[ "childE" ] === undefined,
+                         "only own properties are expected to be captured, " +
+                                                 "not inherited properties" );
+
+}) );
+</script>
